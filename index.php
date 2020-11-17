@@ -10,11 +10,11 @@
     $resultado2 = mysqli_fetch_assoc($query2);
     $numero = $resultado2['idnp'];
 ?>
-
-<html>
+<!DOCTYPE html>
+<html lang="es">
 	<head>
 		<title>ComboBox Ajax, PHP y MySQL</title>
-		
+		<link href="css/styles.css" rel="stylesheet" />
 		<script language="javascript" src="js/jquery-3.1.1.min.js"></script>
 		
 		<script language="javascript">
@@ -24,7 +24,7 @@
 										
 					$("#select-familia option:selected").each(function () {
 						idfamilia = $(this).val();
-						$.get("includes/getMunicipio.php", { idfamilia: idfamilia }, function(data){
+						$.get("includes/getProducto.php", { idfamilia: idfamilia }, function(data){
 							$("#select-productos").html(data);
 						});            
 					});
@@ -38,26 +38,28 @@
 	
 	<body>
 		<form id="combo" name="combo" action="insert_detalle.php" method="POST">
-			<div>Selecciona Familia : <select name= "select-familia" id="select-familia">
-				<option value="0">Familia</option>
-				<?php while($row = $resultado->fetch_assoc()) { ?>
-					<option value="<?php echo $row['idfamilia']; ?>"><?php echo $row['familia']; ?></option>
-				<?php } ?>
-			</select></div>
-			
-			<br />
-			
-			<div>Selecciona Producto : <select name="select-productos" id="select-productos">
-		
-
-
-			</select></div>
-			
-			<div>
-			<input type="text" name = "last" value = <?php echo $numero?> >
-            </div>
-
-			<input type="submit" id="enviar" name="enviar" value="Guardar" />
+			<div class="row">
+				<div class="col-md-6">
+					<label class="font-weight-bold">Selecciona Familia</label>
+					<select class="form-control" name= "select-familia" id="select-familia">
+						<option value="0">Familia</option>
+						<?php while($row = $resultado->fetch_assoc()) { ?>
+						<option value="<?php echo $row['idfamilia']; ?>">
+						<?php echo $row['familia']; ?>
+						</option>
+						<?php } ?>
+					</select>
+				</div>
+				<div class="col-md-6">
+					<label class="font-weight-bold">Selecciona Producto</label>
+					<select class="form-control" name="select-productos" id="select-productos">
+					</select>
+				</div>
+				<div class="col-md-4">
+					<input class="form-control" type="text" name = "last" disabled value = <?php echo $numero?> />
+					<input class=" form-control btn btn-primary" type="submit" id="enviar" name="enviar" value="Guardar" />
+				</div>
+			</div>
 		</form>
 	</body>
 

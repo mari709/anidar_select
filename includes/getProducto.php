@@ -4,7 +4,7 @@
 	
 	$id_familia = $_GET['idfamilia'];
 	
-$queryM = 'SELECT producto FROM productos WHERE idfamilia = "'.$id_familia.'" order by producto';
+$queryM = "SELECT * FROM productos WHERE idfamilia = '".$id_familia."' order by producto";
 
 	echo $queryM;
 
